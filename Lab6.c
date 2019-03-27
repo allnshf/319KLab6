@@ -15,18 +15,21 @@
 #include "Sound.h"
 #include "Piano.h"
 #include "TExaS.h"
-#define		B7	10124
-#define		C7	9556
-#define		EF0 8035
-#define		F0	7159
-#define		FS0 6757
-#define		G0	6378
-#define		AF0	6020
-#define		BF0	5363
-#define		B0	5062
-#define		C0	4778
-#define		D		4257
-#define		EF	4018
+#define		B7	10124		//246.9 Hz
+#define		C7	9556		//261.6 Hz
+#define		D0	8513		//293.7 Hz
+#define		EF0 8035		//311.1 Hz
+#define		E0	7584		//329.6 Hz	
+#define		F0	7159		//349.2 Hz
+#define		FS0 6757		//370   Hz
+#define		G0	6378		//392   Hz
+#define		AF0	6020		//415.3 Hz
+#define		A0	5682		//440   Hz
+#define		BF0	5363		//466.2 Hz
+#define		B0	5062		//493.9 Hz
+#define		C0	4778		//523.3 Hz
+#define		D		4257		//587.3 Hz
+#define		EF	4018		//622.3 Hz
 #define		qtr		2
 #define		eth		4
 #define		half	1
@@ -37,7 +40,7 @@ void DisableInterrupts(void); // Disable interrupts
 void EnableInterrupts(void);  // Enable interrupts
 void Song_Play(uint32_t notes[], uint32_t lengths[], uint16_t size);
 
-uint32_t cycles[8] = {0,9556,8513,7584,7159,6378,5682,5062};
+uint32_t cycles[8] = {0,C0,D0,E0,F0,G0,A0,B0};
 uint32_t heartbeatCount = 0;
 
 uint32_t songNotes[46] = {G0,C0,EF,D,C0,EF,C0,D,C0,AF0,BF0,G0,0,G0,C0,EF,D,C0,EF,C0,
@@ -54,8 +57,8 @@ void heartbeat_init(){
 	}
 
 void song_init(){
-	GPIO_PORTF_DIR_R &= ~0x10;
-	GPIO_PORTF_DEN_R |= 0x10;
+	GPIO_PORTF_DIR_R &= ~0x11;
+	GPIO_PORTF_DEN_R |= 0x11;
 }
 
 int main(void){      
